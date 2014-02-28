@@ -24,10 +24,22 @@
     (helper true seq1 seq2)))
 
 (defn find-first-index [pred a-seq]
-  ":(")
+  ; have to bind current-seq where recur binding happens
+  (loop [first-index 0
+         current-seq a-seq]
+    (cond
+      (empty? current-seq) nil
+      (pred (first current-seq)) first-index
+      :else
+      (recur (inc first-index) (rest current-seq)))))
 
 (defn avg [a-seq]
-  -1)
+  (loop [current-sum 0
+         current-seq a-seq]
+    (if (empty? current-seq)
+      (/ current-sum (count a-seq))
+      (recur (+ current-sum (first current-seq)) (rest current-seq)))))
+
 
 (defn parity [a-seq]
   ":(")
