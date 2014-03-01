@@ -40,9 +40,18 @@
       (/ current-sum (count a-seq))
       (recur (+ current-sum (first current-seq)) (rest current-seq)))))
 
+; only for adding
+(defn toggle [a-set elem]
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
 (defn parity [a-seq]
-  ":(")
+  (loop [current-seq a-seq
+         odd-seq #{}]
+    (if (empty? current-seq)
+      odd-seq
+      (recur (rest current-seq) (toggle odd-seq (first current-seq))))))
 
 (defn fast-fibo [n]
   ":(")
