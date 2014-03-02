@@ -54,8 +54,22 @@
       (recur (rest current-seq) (toggle odd-seq (first current-seq))))))
 
 (defn fast-fibo [n]
-  ":(")
+  (loop [current-num 3
+         fnth 1
+         fnth-1 1]
+    (cond
+      (zero? n) 0
+      (or (== 1 n) (== 2 n)) 1
+      (== current-num n) (+ fnth fnth-1)
+      :esle
+      (recur (inc current-num) (+ fnth fnth-1) fnth))))
 
 (defn cut-at-repetition [a-seq]
-  [":("])
+  (loop [current-seq a-seq
+         cut-seq []]
+    (cond
+      (empty? current-seq) cut-seq
+      (contains? (set cut-seq) (first current-seq)) cut-seq
+      :else
+      (recur (rest current-seq) (conj cut-seq (first current-seq))))))
 
